@@ -24,17 +24,14 @@ export class AuthService {
     return result;
   }
 
-  public async login(user: User) {
+  public async login(user: UserWithoutPassword) {
     const payload: JwtClaims = {
       username: user.username,
       email: user.email,
       sub: user.id,
     };
 
-    const result = {
-      access_token: await this.jwtService.signAsync(payload),
-    }
-
+    const result = await this.jwtService.signAsync(payload);
     return result;
   }
 }
